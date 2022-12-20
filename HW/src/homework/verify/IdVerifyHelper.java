@@ -11,11 +11,9 @@ public class IdVerifyHelper {
     public static void main(String[] args) throws Exception {
         //step1 英文字母放進陣列
         insertCharacter();
-
         //step2 抓取檔案內容
         File doc = new File("./src/idList.txt");//檔案路徑
         BufferedReader obj = new BufferedReader(new FileReader(doc));
-
         //step3 把內容放進list
         String string, line;
         List list = new ArrayList<>();
@@ -23,7 +21,6 @@ public class IdVerifyHelper {
             line = string;
             list.add(line);
         }
-
         // step4 檢查身分證是否正確
         for (int i = 0; i < list.size(); i++) {
             String a = (String) list.get(i);
