@@ -3,9 +3,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.*;
 public class IdVerifyHelper {
+
     static int[] stringToIntArray = new int[26];//放輸入的字串
     static int[] numberArray = {10, 11, 12, 13, 14, 15, 16, 17, 34, 18, 19, 20, 21, 22, 35, 23, 24, 25, 26, 27, 28, 29, 32, 30, 31, 32};//A-Z對應的數字
     static char[] characterArray = new char[26];//A-Z
+
     public static void main(String[] args) throws Exception {
         //step1 英文字母放進陣列
         insertCharacter();
@@ -14,14 +16,14 @@ public class IdVerifyHelper {
         BufferedReader obj = new BufferedReader(new FileReader(file));
         //step3 把內容放進list
         String string, line;
-        List list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         while ((string = obj.readLine()) != null) {
             line = string;
             list.add(line);
         }
         // step4 檢查身分證是否正確
         for (int i = 0; i < list.size(); i++) {
-            String idNum = (String) list.get(i);
+            String idNum = list.get(i);
             String upperIdNum = idNum.toUpperCase();
             System.out.println("===========您輸入的身分證字號" + list.get(i) + "=========");
             if (check(upperIdNum) == true) {
@@ -31,7 +33,7 @@ public class IdVerifyHelper {
             }
         }
     }
-
+    
     public static boolean check (String id){
         int index = 0;
         String inputString = id;//身分證字串放進來
