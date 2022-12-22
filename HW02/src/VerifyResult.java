@@ -30,8 +30,8 @@ public class VerifyResult {
     @Override
     public String toString() {
         return "content{" +
-                "isVerifySuccess =" + isVerifySuccess +
                 ", id ='" + id + '\'' +
+                ", isVerifySuccess =" + isVerifySuccess +'\''+
                 ", message =" + message +
                 '}';
     }

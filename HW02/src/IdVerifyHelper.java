@@ -32,7 +32,7 @@ public class IdVerifyHelper {
             String idNum = fileDataList.get(i);//抓list內的每筆資料
             String upperIdNum = idNum.toUpperCase();
             verifyResult.setId(fileDataList.get(i));
-            //身份證字號應該是1個英文字母接著9個數字!
+            //判斷身分證格式，身份證字號是1個英文字母接著9個數字
             if (!upperIdNum.matches("[a-zA-Z]\\d{9}")) {
                 verifyResult.setVerifySuccess(false);
                 verifyResult.setMessage("驗證失敗");
