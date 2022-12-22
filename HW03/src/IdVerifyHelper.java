@@ -15,22 +15,13 @@ public class IdVerifyHelper {
     public List<VerifyResult> validate(String pathFileName) throws Exception {
         //step1 英文字母放進陣列
         insertCharacter();
-        //step2 抓取檔案內容
-        File file = new File(pathFileName);//檔案路徑
-        BufferedReader obj = new BufferedReader(new FileReader(file));
-        //step3 把內容放進list
-        String string, line;
-        List<String> fileDataList = new ArrayList<>();
-        while ((string = obj.readLine()) != null) {
-            line = string;
-            fileDataList.add(line);
-        }
-        // step4 檢查身分證是否正確
+        //step2 把file內容放進list
+        List<String> fileDataList =fileContentAddList(pathFileName);
+        // step3 檢查身分證是否正確
         List<VerifyResult> verifyList = new ArrayList<>();
         for (int i = 0; i < fileDataList.size(); i++) {
             VerifyResult verifyResult = new VerifyResult();
             String idNum = fileDataList.get(i);//抓list內的每筆資料
-            System.out.println("第" + (i+1) + "筆資料性別為" + gender(idNum));
             String upperIdNum = idNum.toUpperCase();
             verifyResult.setId(fileDataList.get(i));
             //判斷身分證格式，身份證字號是1個英文字母接著9個數字
@@ -38,7 +29,7 @@ public class IdVerifyHelper {
                 verifyResult.setVerifySuccess(false);
                 verifyResult.setMessage("驗證失敗");
             } else {
-                if (check(upperIdNum) == true) {
+                if (check(upperIdNum) == true && gender(idNum)== true) {
                     verifyResult.setVerifySuccess(true);
                     verifyResult.setMessage("驗證成功");
                 } else {
@@ -55,7 +46,6 @@ public class IdVerifyHelper {
         int index = 0;
         String inputString = id;//身分證字串放進來
         Character firstLetter = inputString.charAt(0);//抓出字串第一個英文
-        String gender = String.valueOf(inputString.charAt(1));//抓出字串第二個英文
         for (int i = 1; i <= inputString.length() - 1; i++) {
             stringToIntArray[i] = (int) (inputString.charAt(i)) - 48;//把身分證字號放入stringToIntArray[]，inputString.charAt(i)裡面的是字元1，(int)(inputString.charAt(i))傳回ASCII，0的ASCII十進位是48所以抓到什麼數字轉成int -48
         }
@@ -77,15 +67,27 @@ public class IdVerifyHelper {
         }
     }
 
-    public String gender(String gender) {
+    public boolean gender(String gender) {
         String determine = String.valueOf(gender.charAt(1));//抓出字串第二個英文
         //性別判斷
         if (determine.equals("2")) {
-            return "女性";
+            return true;
         } else if (determine.equals("1")) {
-            return "男性";
+            return true;
         }
-        return "未知";
+        return false;
     }
 
+    public List<String> fileContentAddList(String pathFileName) throws Exception{
+        File file = new File(pathFileName);//檔案路徑
+        BufferedReader obj = new BufferedReader(new FileReader(file));
+        //把內容放進list
+        String string, line;
+        List<String> fileDataList = new ArrayList<>();
+        while ((string = obj.readLine()) != null) {
+            line = string;
+            fileDataList.add(line);
+        }
+        return fileDataList;
+    }
 }

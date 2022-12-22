@@ -20,17 +20,9 @@ public class VerifyHelperC02 extends IdVerifyHelper {
     public List<VerifyResult> validate(String pathFileName) throws Exception {
         //step1 英文字母放進陣列
         insertCharacter();
-        //step2 抓取檔案內容
-        File file = new File(pathFileName);//檔案路徑
-        BufferedReader obj = new BufferedReader(new FileReader(file));
-        //step3 把內容放進list
-        String string, line;
-        List<String> fileDataList = new ArrayList<>();
-        while ((string = obj.readLine()) != null) {
-            line = string;
-            fileDataList.add(line);
-        }
-        // step4 檢查身分證是否正確
+        //step2 把file內容放進list
+        List<String> fileDataList =fileContentAddList(pathFileName);
+        // step3 檢查身分證是否正確
         List<VerifyResult> verifyList = new ArrayList<>();
         for (int i = 0; i < fileDataList.size(); i++) {
             VerifyResult verifyResult = new VerifyResult();
@@ -38,11 +30,17 @@ public class VerifyHelperC02 extends IdVerifyHelper {
             String upperIdNum = idNum.toUpperCase();
             verifyResult.setId(fileDataList.get(i));
             //判斷身分證格式，身份證字號是1個英文字母接著9個數字
-            if (!upperIdNum.matches("[a-zA-Z]\\d{9}")) {
+            System.out.println(upperIdNum.matches("[a-zA-Z0-9]\\."));
+            System.out.println(upperIdNum);
+            //判斷數字英文未完成
+            if (upperIdNum.matches("[a-zA-Z0-9]") == true ) {
+                verifyResult.setVerifySuccess(false);
+                verifyResult.setMessage("証號格式錯誤");
+            } else if (!upperIdNum.matches("[a-zA-Z]\\d{9}")) {
                 verifyResult.setVerifySuccess(false);
                 verifyResult.setMessage("格式錯誤");
             } else {
-                if (check(upperIdNum) == true) {
+                if (check(upperIdNum) == true && gender(idNum) == true) {
                     verifyResult.setVerifySuccess(true);
                     verifyResult.setMessage("驗證成功");
                 } else {
@@ -54,5 +52,4 @@ public class VerifyHelperC02 extends IdVerifyHelper {
         }
         return verifyList;
     }
-
 }

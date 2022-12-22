@@ -35,4 +35,5 @@ public class VerifyResult {
                 ", message =" + message +
                 '}';
     }
+
 }

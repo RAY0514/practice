@@ -20,17 +20,9 @@ public class VerifyHelperC01 extends IdVerifyHelper {
     public List<VerifyResult> validate(String pathFileName) throws Exception {
         //step1 英文字母放進陣列
         insertCharacter();
-        //step2 抓取檔案內容
-        File file = new File(pathFileName);//檔案路徑
-        BufferedReader obj = new BufferedReader(new FileReader(file));
-        //step3 把內容放進list
-        String string, line;
-        List<String> fileDataList = new ArrayList<>();
-        while ((string = obj.readLine()) != null) {
-            line = string;
-            fileDataList.add(line);
-        }
-        // step4 檢查身分證是否正確
+        //step2 把file內容放進list
+        List<String> fileDataList = fileContentAddList(pathFileName);
+        // step3 檢查身分證是否正確
         List<VerifyResult> verifyList = new ArrayList<>();
         for (int i = 0; i < fileDataList.size(); i++) {
             VerifyResult verifyResult = new VerifyResult();
@@ -41,13 +33,13 @@ public class VerifyHelperC01 extends IdVerifyHelper {
             if (idNum.length() != 10) {
                 verifyResult.setVerifySuccess(false);
                 verifyResult.setMessage("證件長度不為10");
-                System.out.println("證件長度不為10: "+idNum);
-            }else if (!idNum.matches("[A-Z]\\d{9}")) {
-                    verifyResult.setVerifySuccess(false);
-                    verifyResult.setMessage("證件格式錯誤");
-                    System.out.println("證件格式錯誤:　"+idNum);
+                System.out.println("證件長度不為10: " + idNum);
+            } else if (!idNum.matches("[A-Z]\\d{9}")) {
+                verifyResult.setVerifySuccess(false);
+                verifyResult.setMessage("證件格式錯誤");
+                System.out.println("證件格式錯誤:　" + idNum);
             } else {
-                if (check(upperIdNum) == true) {
+                if (check(upperIdNum) == true && gender(idNum) == true) {
                     verifyResult.setVerifySuccess(true);
                     verifyResult.setMessage("驗證成功");
                 } else {
