@@ -7,12 +7,6 @@ public class VerifyHelperC02 extends IdVerifyHelper {
         super(fileName);
     }
 
-    public static void main(String[] args) throws Exception {
-        VerifyHelperC02 verifyHelperC02 = new VerifyHelperC02("./src/idList.txt");
-        System.out.println(verifyHelperC02.validate("./src/idList3.txt"));
-
-    }
-
     @Override
     public List<VerifyResult> validate(String pathFileName) throws Exception {
         //step1 英文字母放進陣列
