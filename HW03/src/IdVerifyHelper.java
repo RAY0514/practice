@@ -16,7 +16,7 @@ public class IdVerifyHelper {
         //step1 英文字母放進陣列
         insertCharacter();
         //step2 把file內容放進list
-        List<String> fileDataList =fileContentAddList(pathFileName);
+        List<String> fileDataList = fileContentAddList(pathFileName);
         // step3 檢查身分證是否正確
         List<VerifyResult> verifyList = new ArrayList<>();
         for (int i = 0; i < fileDataList.size(); i++) {
@@ -29,7 +29,7 @@ public class IdVerifyHelper {
                 verifyResult.setVerifySuccess(false);
                 verifyResult.setMessage("驗證失敗");
             } else {
-                if (check(upperIdNum) == true && gender(idNum)== true) {
+                if (check(upperIdNum) == true && gender(idNum) == true) {
                     verifyResult.setVerifySuccess(true);
                     verifyResult.setMessage("驗證成功");
                 } else {
@@ -78,7 +78,7 @@ public class IdVerifyHelper {
         return false;
     }
 
-    public List<String> fileContentAddList(String pathFileName) throws Exception{
+    public List<String> fileContentAddList(String pathFileName) throws Exception {
         File file = new File(pathFileName);//檔案路徑
         BufferedReader obj = new BufferedReader(new FileReader(file));
         //把內容放進list
