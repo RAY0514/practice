@@ -51,48 +51,17 @@ public class MemberController {
     @GetMapping("/rest/all-teacher")
     public List<Member> teacher() {
         List<Member> list = new ArrayList<>();
-        Teacher teacher1 = new Teacher();
-        teacher1.setId("1");
-        teacher1.setName("Billy");
-        teacher1.setGender("male");
-        teacher1.setSubject("數學");
-        teacher1.setGobTitle("教務主任");
-        list.add(teacher1);
-
-        Teacher teacher2 = new Teacher();
-        teacher2.setId("2");
-        teacher2.setName("Heidi");
-        teacher2.setGender("female");
-        teacher2.setSubject("英文");
-        teacher2.setGobTitle("教師");
-        list.add(teacher2);
+        list.add(memberList().get(0));
+        list.add(memberList().get(1));
         return list;
     }
 
     @GetMapping("/rest/all-student")
     public List<Member> student() {
         List<Member> list = new ArrayList<>();
-        Student student1 = new Student();
-        student1.setId("3");
-        student1.setName("Jacky");
-        student1.setGender("male");
-        student1.setClasses("301");
-        student1.setAdmissionYearMonth("201910");
-        list.add(student1);
-
-        Student student2 = new Student();
-        student2.setId("4");
-        student2.setName("Lawrence");
-        student2.setGender("male");
-        student2.setClasses("801");
-        student2.setAdmissionYearMonth("201812");
-        list.add(student2);
+        list.add(memberList().get(2));
+        list.add(memberList().get(3));
         return list;
-    }
-
-    @GetMapping("/rest/student/{id}")
-    public Member test(@PathVariable("id") int id) {
-        return memberList().get(id - 1);
     }
 
     @GetMapping("/rest/student")
