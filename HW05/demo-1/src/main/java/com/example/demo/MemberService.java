@@ -3,6 +3,7 @@ package com.example.demo;
 import java.util.List;
 
 public class MemberService {
+
     MemberController memberController = new MemberController();
 
     public List<Member> getAllMember() {
@@ -26,6 +27,5 @@ public class MemberService {
         // 根據輸入的ID取得學生資料
         return memberController.memberList().get(0);
     }
-
 
 }
