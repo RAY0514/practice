@@ -1,4 +1,4 @@
-package com.example.demo.Emtity;
+package com.example.demo.emtity;
 
 import javax.persistence.*;
 
