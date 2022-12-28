@@ -1,10 +1,10 @@
-package com.example.demo.emtity;
+package com.example.demo.entity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "member")
-public class MEMBER {
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
