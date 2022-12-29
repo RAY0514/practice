@@ -19,7 +19,6 @@ public class MemberService {
     }
 
     public List<Member> getAllTeacher() {
-        memberRepository.findAll();
         List<Member> list = new ArrayList<>();
         list.add(memberRepository.findAll().get(0));
         list.add(memberRepository.findAll().get(1));
@@ -27,7 +26,6 @@ public class MemberService {
     }
 
     public List<Member> getAllStudent() {
-        memberRepository.findAll();
         List<Member> list = new ArrayList<>();
         list.add(memberRepository.findAll().get(2));
         list.add(memberRepository.findAll().get(3));
