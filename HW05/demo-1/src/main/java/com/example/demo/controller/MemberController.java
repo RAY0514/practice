@@ -20,12 +20,12 @@ public class MemberController {
         return memberService.getAllMember();
     }
 
-    @GetMapping("/rest/getAllTeacher")
+    @GetMapping("/rest/all-teacher")
     public List<Member> getAllTeacher() {
         return memberService.getAllTeacher();
     }
 
-    @GetMapping("/rest/getAllStudent")
+    @GetMapping("/rest/all-student")
     public List<Member> getAllStudent() {
         return memberService.getAllStudent();
     }
