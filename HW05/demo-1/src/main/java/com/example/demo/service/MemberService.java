@@ -1,10 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Member;
+import com.example.demo.emtity.Member;
 import com.example.demo.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +36,15 @@ public class MemberService {
 
     public List<Member> getTeacher(String teacherId) {
         // 根據輸入的ID取得教師資料
-        return memberRepository.findByMemberName(teacherId);
+        Integer teacherIdNum = Integer.valueOf(teacherId).intValue();
+        System.out.println(teacherIdNum);
+        return memberRepository.findByMemberId(teacherIdNum);
     }
 
     public List<Member> getStudent(String studentId) {
         // 根據輸入的ID取得學生資料
-        return memberRepository.findByMemberName(studentId);
+        int studentIdNum = Integer.valueOf(studentId).intValue();
+        return memberRepository.findByMemberId(studentIdNum);
     }
 
 }
