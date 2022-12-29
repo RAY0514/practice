@@ -7,9 +7,8 @@ import javax.persistence.*;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private int memberId;
+    private String memberId;
 
     @Column(name = "name")
     private String memberName;
@@ -29,11 +28,11 @@ public class Member {
     @Column(name = "class")
     private String classes;
 
-    public int getMemberId() {
+    public String getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(int memberId) {
+    public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
 

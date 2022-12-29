@@ -34,15 +34,12 @@ public class MemberService {
 
     public List<Member> getTeacher(String teacherId) {
         // 根據輸入的ID取得教師資料
-        Integer teacherIdNum = Integer.valueOf(teacherId).intValue();
-        System.out.println(teacherIdNum);
-        return memberRepository.findByMemberId(teacherIdNum);
+        return memberRepository.findByMemberId(teacherId);
     }
 
     public List<Member> getStudent(String studentId) {
         // 根據輸入的ID取得學生資料
-        int studentIdNum = Integer.valueOf(studentId).intValue();
-        return memberRepository.findByMemberId(studentIdNum);
+        return memberRepository.findByMemberId(studentId);
     }
 
 }
