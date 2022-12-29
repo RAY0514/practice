@@ -84,4 +84,17 @@ public class Member {
     public void setClasses(String classes) {
         this.classes = classes;
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "memberId=" + memberId +
+                ", memberName='" + memberName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", subject='" + subject + '\'' +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", admissionYearMonth='" + admissionYearMonth + '\'' +
+                ", classes='" + classes + '\'' +
+                '}';
+    }
 }
