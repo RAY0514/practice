@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Member;
+import com.example.demo.entity.Student;
+import com.example.demo.entity.Teacher;
 import com.example.demo.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,28 +20,42 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public List<Member> getAllTeacher() {
-        List<Member> list = new ArrayList<>();
-        list.add(memberRepository.findAll().get(0));
-        list.add(memberRepository.findAll().get(1));
-        return list;
+    public void getAllTeacher() {
+        //全部老師
+        //jpa isn ull
     }
 
-    public List<Member> getAllStudent() {
-        List<Member> list = new ArrayList<>();
-        list.add(memberRepository.findAll().get(2));
-        list.add(memberRepository.findAll().get(3));
-        return list;
+    public List<Student> getAllStudent() {
+        //全部學生
+       return null;
     }
 
-    public List<Member> getTeacher(String teacherId) {
+
+
+    public List<Teacher> getTeacher(String teacherId) {
         // 根據輸入的ID取得教師資料
-        return memberRepository.findByMemberId(teacherId);
+        List<Teacher> list = new ArrayList<>();
+        Teacher Teacher = new Teacher();
+        Teacher.setId(memberRepository.findMemberById(teacherId).getId());
+        Teacher.setName(memberRepository.findMemberById(teacherId).getName());
+        Teacher.setGender(memberRepository.findMemberById(teacherId).getGender());
+        Teacher.setSubject(memberRepository.findMemberById(teacherId).getSubject());
+        Teacher.setJobTitle(memberRepository.findMemberById(teacherId).getJobTitle());
+        list.add(Teacher);
+        return list;
     }
 
-    public List<Member> getStudent(String studentId) {
+    public List<Student> getStudent(String studentId) {
         // 根據輸入的ID取得學生資料
-        return memberRepository.findByMemberId(studentId);
+        List<Student> list = new ArrayList<>();
+        Student student = new Student();
+        student.setId(memberRepository.findMemberById(studentId).getId());
+        student.setName(memberRepository.findMemberById(studentId).getName());
+        student.setGender(memberRepository.findMemberById(studentId).getGender());
+        student.setClasses(memberRepository.findMemberById(studentId).getClasses());
+        student.setAdmissionYearMonth(memberRepository.findMemberById(studentId).getAdmissionYearMonth());
+        list.add(student);
+        return list;
     }
 
 }
