@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Member;
-import com.example.demo.entity.Student;
-import com.example.demo.entity.Teacher;
+import com.example.demo.DAO.Student;
+import com.example.demo.DAO.Teacher;
 import com.example.demo.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,20 +16,62 @@ public class MemberService {
     @Autowired
     MemberRepository memberRepository;
 
-    public List<Member> getAllMember() {
-        return memberRepository.findAll();
+    public List<com.example.demo.DAO.Member> getAllMember() {
+        List<com.example.demo.DAO.Member> list = new ArrayList<>();
+        List<Member> listMember = memberRepository.findAll();
+        for (int i = 0; i <= 1; i++) {
+            Teacher teacher = new Teacher();
+            teacher.setId(listMember.get(i).getId());
+            teacher.setName(listMember.get(i).getName());
+            teacher.setGender(listMember.get(i).getGender());
+            teacher.setSubject(listMember.get(i).getSubject());
+            teacher.setJobTitle(listMember.get(i).getJobTitle());
+            list.add(teacher);
+        }
+        for (int i = 2; i <= 3; i++) {
+            Student student = new Student();
+            student.setId(listMember.get(i).getId());
+            student.setName(listMember.get(i).getName());
+            student.setGender(listMember.get(i).getGender());
+            student.setClasses(listMember.get(i).getClasses());
+            student.setAdmissionYearMonth(listMember.get(i).getAdmissionYearMonth());
+            list.add(student);
+        }
+        return list;
     }
 
-    public void getAllTeacher() {
+    public List<Teacher> getAllTeacher() {
         //全部老師
-        //jpa isn ull
+        //jpa is null
+        List<Member> listMember = memberRepository.findByClasses(null);//沒有Classes的是老師
+        List<Teacher> listTeacher = new ArrayList<>();
+        for (int i = 0; i < listMember.size(); i++) {
+            Teacher teacher = new Teacher();
+            teacher.setId(listMember.get(i).getId());
+            teacher.setName(listMember.get(i).getName());
+            teacher.setGender(listMember.get(i).getGender());
+            teacher.setSubject(listMember.get(i).getSubject());
+            teacher.setJobTitle(listMember.get(i).getJobTitle());
+            listTeacher.add(teacher);
+        }
+        return listTeacher;
     }
 
     public List<Student> getAllStudent() {
         //全部學生
-       return null;
+        List<Member> listMember = memberRepository.findBySubject(null);//沒有Subject的是學生
+        List<Student> listStudent = new ArrayList<>();
+        for (int i = 0; i < listMember.size(); i++) {
+            Student student = new Student();
+            student.setId(listMember.get(i).getId());
+            student.setName(listMember.get(i).getName());
+            student.setGender(listMember.get(i).getGender());
+            student.setClasses(listMember.get(i).getClasses());
+            student.setAdmissionYearMonth(listMember.get(i).getAdmissionYearMonth());
+            listStudent.add(student);
+        }
+        return listStudent;
     }
-
 
 
     public List<Teacher> getTeacher(String teacherId) {

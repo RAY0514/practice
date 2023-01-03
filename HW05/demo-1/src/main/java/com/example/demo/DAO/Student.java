@@ -1,31 +1,11 @@
-package com.example.demo.entity;
+package com.example.demo.DAO;
 
-import javax.persistence.*;
+public class Student  extends Member{
 
-@Entity
-@Table(name = "member")
-public class Member {
-
-    @Id
-    @Column(name = "id")
     private String id;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "gender")
     private String gender;
-
-    @Column(name = "subject")
-    private String subject;
-
-    @Column(name = "jobTitle")
-    private String jobTitle;
-
-    @Column(name = "admissionYearMonth")
     private String admissionYearMonth;
-
-    @Column(name = "class")
     private String classes;
 
     public String getId() {
@@ -52,22 +32,6 @@ public class Member {
         this.gender = gender;
     }
 
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
     public String getAdmissionYearMonth() {
         return admissionYearMonth;
     }
@@ -86,12 +50,10 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
+        return "Student{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
-                ", subject='" + subject + '\'' +
-                ", jobTitle='" + jobTitle + '\'' +
                 ", admissionYearMonth='" + admissionYearMonth + '\'' +
                 ", classes='" + classes + '\'' +
                 '}';

@@ -21,8 +21,7 @@ class MemberServiceTest {
     @DisplayName("全部教師資料抓取")
     @Test
     void getAllTeacher() {
-        memberService.getAllTeacher();
-//        System.out.println(memberService.getAllTeacher());
+        System.out.println(memberService.getAllTeacher());
     }
 
     @DisplayName("全部學生資料抓取")
