@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.DAO.Member;
-import com.example.demo.DAO.Student;
-import com.example.demo.DAO.Teacher;
+import com.example.demo.entity.Member;
+import com.example.demo.entity.Student;
+import com.example.demo.entity.Teacher;
 import com.example.demo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,22 +23,22 @@ public class MemberController {
     }
 
     @GetMapping("/rest/all-teacher")
-    public List<Teacher> getAllTeacher() {
+    public List<Member> getAllTeacher() {
         return memberService.getAllTeacher();
     }
 
     @GetMapping("/rest/all-student")
-    public List<Student> getAllStudent() {
+    public List<Member> getAllStudent() {
         return memberService.getAllStudent();
     }
 
     @GetMapping("/rest/getTeacher")
-    public List<Teacher> getTeacher(@RequestParam("id") String id) {
+    public List<Member> getTeacher(@RequestParam("id") String id) {
         return memberService.getTeacher(id);
     }
 
     @GetMapping("/rest/getStudent")
-    public List<Student> getStudent(@RequestParam("id") String id) {
+    public List<Member> getStudent(@RequestParam("id") String id) {
         return memberService.getStudent(id);
     }
 
