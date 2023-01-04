@@ -17,77 +17,97 @@ public class MemberService {
     MemberRepository memberRepository;
 
     public List<Member> getAllMember() {
-
-        List<Member> list = new ArrayList<>();
-        for (Member memberTeacher : getAllTeacher()) {//放老師
-            list.add(memberTeacher);
+        List<Member> memberList = new ArrayList<>();
+        for (Member teacherMember : getAllTeacher()) {//放老師
+            memberList.add(teacherMember);
         }
-        for (Member memberStudent : getAllStudent()) {//放老師
-            list.add(memberStudent);
+        for (Member studentMember : getAllStudent()) {//放老師
+            memberList.add(studentMember);
         }
-        return list;
+        return memberList;
     }
 
     public List<Member> getAllTeacher() {
         //全部老師
         //jpa is null
-        List<Member> listMember = memberRepository.findByClasses(null);//沒有Classes的是老師
-        List<Member> listTeacher = new ArrayList<>();
-        for (int i = 0; i < listMember.size(); i++) {
+        List<Member> memberList = memberRepository.findByClasses(null);//沒有Classes的是老師
+        List<Member> teacherList = new ArrayList<>();
+        for (int i = 0; i < memberList.size(); i++) {
             Member teacher = new Teacher();
-            teacher.setId(listMember.get(i).getId());
-            teacher.setName(listMember.get(i).getName());
-            teacher.setGender(listMember.get(i).getGender());
-            teacher.setSubject(listMember.get(i).getSubject());
-            teacher.setJobTitle(listMember.get(i).getJobTitle());
-            listTeacher.add(teacher);
+            teacher.setId(memberList.get(i).getId());
+            teacher.setName(memberList.get(i).getName());
+            teacher.setGender(memberList.get(i).getGender());
+            teacher.setSubject(memberList.get(i).getSubject());
+            teacher.setJobTitle(memberList.get(i).getJobTitle());
+            teacherList.add(teacher);
         }
-        return listTeacher;
+        return memberList;
     }
 
     public List<Member> getAllStudent() {
         //全部學生
-        List<Member> listMember = memberRepository.findBySubject(null);//沒有Subject的是學生
-        List<Member> listStudent = new ArrayList<>();
-        for (int i = 0; i < listMember.size(); i++) {
+        List<Member> memberList = memberRepository.findBySubject(null);//沒有Subject的是學生
+        List<Member> studentList = new ArrayList<>();
+        for (int i = 0; i < memberList.size(); i++) {
             Member student = new Student();
-            student.setId(listMember.get(i).getId());
-            student.setName(listMember.get(i).getName());
-            student.setGender(listMember.get(i).getGender());
-            student.setClasses(listMember.get(i).getClasses());
-            student.setAdmissionYearMonth(listMember.get(i).getAdmissionYearMonth());
-            listStudent.add(student);
+            student.setId(memberList.get(i).getId());
+            student.setName(memberList.get(i).getName());
+            student.setGender(memberList.get(i).getGender());
+            student.setClasses(memberList.get(i).getClasses());
+            student.setAdmissionYearMonth(memberList.get(i).getAdmissionYearMonth());
+            studentList.add(student);
         }
-        return listStudent;
+        return studentList;
     }
-
 
     public List<Member> getTeacher(String teacherId) {
         // 根據輸入的ID取得教師資料
-        List<Member> list = new ArrayList<>();
-        Member teacherDate =memberRepository.findMemberById(teacherId);
+        List<Member> memberList = new ArrayList<>();
+        Member teacherDate = memberRepository.findMemberById(teacherId);
         Member Teacher = new Teacher();
         Teacher.setId(teacherDate.getId());
         Teacher.setName(teacherDate.getName());
         Teacher.setGender(teacherDate.getGender());
         Teacher.setSubject(teacherDate.getSubject());
         Teacher.setJobTitle(teacherDate.getJobTitle());
-        list.add(Teacher);
-        return list;
+        memberList.add(Teacher);
+        return memberList;
     }
 
     public List<Member> getStudent(String studentId) {
         // 根據輸入的ID取得學生資料
-        List<Member> list = new ArrayList<>();
-        Member studentDate =memberRepository.findMemberById(studentId);
+        List<Member> memberList = new ArrayList<>();
+        Member studentDate = memberRepository.findMemberById(studentId);
         Member student = new Student();
         student.setId(studentDate.getId());
         student.setName(studentDate.getName());
         student.setGender(studentDate.getGender());
         student.setClasses(studentDate.getClasses());
         student.setAdmissionYearMonth(studentDate.getAdmissionYearMonth());
-        list.add(student);
-        return list;
+        memberList.add(student);
+        return memberList;
+    }
+
+    //crud
+    public void insert( Member member ) {
+//        Member member = new Member();
+//        member.setId("5");
+//        member.setName("ray");
+//        member.setGender("male");
+//        member.setClasses("556");
+//        member.setAdmissionYearMonth("202212");
+//        System.out.println(member);
+        memberRepository.save(member);
+    }
+
+    public void update() {//
+        Member Id = memberRepository.findMemberById("5");
+        Id.setClasses("123");
+        memberRepository.save(Id);
+    }
+
+    public void delete(String id) {
+        memberRepository.deleteById(id);
     }
 
 }

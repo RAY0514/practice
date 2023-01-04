@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Member;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,26 @@ class MemberServiceTest {
     @Test
     void getStudent() {
         System.out.println(memberService.getStudent("3"));
+    }
+
+    @DisplayName("新增資料")
+    @Test
+    void insert() {
+        Member member = new Member();
+
+        memberService.insert(member);
+    }
+
+    @DisplayName("更新資料")
+    @Test
+    void updata() {
+        memberService.update();
+    }
+
+    @DisplayName("刪除資料")
+    @Test
+    void delete() {
+        memberService.delete("5");
     }
 
 }
