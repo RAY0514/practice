@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,7 +113,14 @@ public class MemberService {
     //crud
     public void insert(Member member) {
         //POST 插入資料放body
-        memberRepository.save(member);
+        if (repeatData(member) == false) {//沒有重複
+            memberRepository.save(member);
+            System.out.println("新增成功");
+        } else {
+            System.out.println("資料id已存在");
+        }
+
+//        throw new EntityExistsException();
     }
 
     public void update(Member newMember) {
@@ -132,4 +140,16 @@ public class MemberService {
         return memberRepository.findMemberById(studentId);
     }
 
+    public boolean repeatData(Member newMember) {
+        List<Member> idRepeatcheck = memberRepository.findAll();
+        for (Member oldMember : idRepeatcheck) {
+//            System.out.println(oldMember);
+            if (newMember.getId().equals(oldMember.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
+

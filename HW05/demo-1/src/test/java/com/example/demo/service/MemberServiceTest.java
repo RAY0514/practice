@@ -51,14 +51,18 @@ class MemberServiceTest {
         System.out.println(memberService.getStudent("3"));
     }
 
-    //    @DisplayName("新增資料")
-//    @Test
-//    void insert() {
-//        Member member = new Member();
-//
-//        memberService.insert(member);
-//    }
-//
+    @DisplayName("新增資料")
+    @Test
+    void insert() {//資料一樣會變更新
+        Member member = new Member();
+        member.setId("6");
+        member.setName("fffff");
+        member.setClasses("456");
+        member.setAdmissionYearMonth("8798789797");
+        memberService.insert(member);
+    }
+
+    //
     @DisplayName("更新資料")
     @Test
     void updata() {
@@ -80,4 +84,11 @@ class MemberServiceTest {
     void getStudenttest() {
         System.out.println(memberService.getStudentTest("5"));
     }
+
+//    @DisplayName("資料重複測試")
+//    @Test
+//    void repeatData() {
+//        memberService.repeatData("5");
+//
+//    }
 }

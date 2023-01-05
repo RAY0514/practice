@@ -40,35 +40,12 @@ public class MemberController {
 
     @PostMapping("/rest/insert")
     public void insert(@RequestBody Member member) {
-        memberService.insert(member);
+        memberService.insert(member);//id
     }
 
     @GetMapping("/rest/update")
     public void update(@RequestBody Member updateMember, @RequestParam("id") String id) {
-        Member oldMember = memberService.getStudentTest(id);
-        System.out.println("原本的資料" + oldMember);
-        System.out.println("要更新的資料" + updateMember);
-        if (updateMember.getName() != null) {
-            oldMember.setName(updateMember.getName());
-        }
-        if (updateMember.getGender() != null) {
-            oldMember.setGender(updateMember.getGender());
-        }
-        if (updateMember.getSubject() != null) {
-            oldMember.setSubject(updateMember.getSubject());
-        }
-        if (updateMember.getJobTitle() != null) {
-            oldMember.setJobTitle(updateMember.getJobTitle());
-        }
-        if (updateMember.getAdmissionYearMonth() != null) {
-            oldMember.setAdmissionYearMonth(updateMember.getAdmissionYearMonth());
-        }
-        if (updateMember.getClasses() != null) {
-            oldMember.setClasses(updateMember.getClasses());
-        }
-        System.out.println("最後的資料" + oldMember);
-        System.out.println("-----------------");
-        memberService.update(oldMember);
+        memberService.update(updateMember);
         System.out.println(memberService.getStudent(id));
     }
 
