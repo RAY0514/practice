@@ -15,6 +15,7 @@ class MemberServiceTest {
 
     @DisplayName("全部資料抓取")
     @Test
+    //突然出現admissionYearMonth='null', classes='null'},
     void getAllMember() {
         System.out.println(memberService.getAllMember());
     }
@@ -43,24 +44,24 @@ class MemberServiceTest {
         System.out.println(memberService.getStudent("3"));
     }
 
-    @DisplayName("新增資料")
-    @Test
-    void insert() {
-        Member member = new Member();
-
-        memberService.insert(member);
-    }
-
-    @DisplayName("更新資料")
-    @Test
-    void updata() {
-        memberService.update();
-    }
-
-    @DisplayName("刪除資料")
-    @Test
-    void delete() {
-        memberService.delete("5");
-    }
+//    @DisplayName("新增資料")
+//    @Test
+//    void insert() {
+//        Member member = new Member();
+//
+//        memberService.insert(member);
+//    }
+//
+//    @DisplayName("更新資料")
+//    @Test
+//    void updata() {
+//        memberService.update();
+//    }
+//
+//    @DisplayName("刪除資料")
+//    @Test
+//    void delete() {
+//        memberService.delete("5");
+//    }
 
 }

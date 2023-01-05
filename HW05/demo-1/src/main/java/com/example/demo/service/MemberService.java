@@ -41,7 +41,7 @@ public class MemberService {
             teacher.setJobTitle(memberList.get(i).getJobTitle());
             teacherList.add(teacher);
         }
-        return memberList;
+        return teacherList;
     }
 
     public List<Member> getAllStudent() {
@@ -89,14 +89,7 @@ public class MemberService {
     }
 
     //crud
-    public void insert( Member member ) {
-//        Member member = new Member();
-//        member.setId("5");
-//        member.setName("ray");
-//        member.setGender("male");
-//        member.setClasses("556");
-//        member.setAdmissionYearMonth("202212");
-//        System.out.println(member);
+    public void insert(Member member) {
         memberRepository.save(member);
     }
 
