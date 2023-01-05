@@ -14,13 +14,13 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     找class
     沒有class是老師
      */
-    List<Member> findByClasses(String classes);
+    List<Member> findByClasses(String classes);//找老師
 
     /*
     找Subject
     沒有Subject是學生
      */
-    List<Member> findBySubject(String subject);
+    List<Member> findBySubject(String subject);//找學生
 
 
 }
