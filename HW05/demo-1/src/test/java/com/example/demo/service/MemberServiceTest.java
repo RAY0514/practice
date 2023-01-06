@@ -67,17 +67,17 @@ class MemberServiceTest {
     @DisplayName("更新資料")
     @Test
     void updata() {
-        Member member = memberService.getStudentTest("5");
+        Member member = new Member();
+        member.setId("6");
         member.setClasses("789");
-        member.setAdmissionYearMonth("1010");
+        member.setAdmissionYearMonth("0921");
         memberService.update(member);
-        System.out.println(memberService.getStudent("5"));
     }
 
     @DisplayName("刪除資料")
     @Test
     void delete() {
-        memberService.delete("5");
+        memberService.delete("6");
     }
 
     @DisplayName("特定學生資料抓取測試")

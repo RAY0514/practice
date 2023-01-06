@@ -124,7 +124,13 @@ public class MemberService {
     }
 
     public void update(Member newMember) {
-        memberRepository.save(newMember);
+        Optional<Member> checkId = memberRepository.findById(newMember.getId());
+
+        if (!checkId.isPresent()) {
+            System.out.println("資料不存在");
+        } else {
+            memberRepository.save(newMember);
+        }
     }
 
     public void delete(String id) {

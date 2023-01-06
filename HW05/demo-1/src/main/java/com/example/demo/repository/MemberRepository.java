@@ -4,26 +4,20 @@ import com.example.demo.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 //JpaRepository<entity , entity ID 資料型態>
 public interface MemberRepository extends JpaRepository<Member, String> {
 
     Member findMemberById(String id);
 
-    @Override
-    Optional<Member> findById(String s);
-
     /*
-        找class
-        沒有class是老師
-         */
+    找class，沒有class是老師
+    */
     List<Member> findByClasses(String classes);//找老師
 
     /*
-    找Subject
-    沒有Subject是學生
-     */
+    找Subject，沒有Subject是學生
+    */
     List<Member> findBySubject(String subject);//找學生
 
 
