@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityExistsException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -115,7 +114,6 @@ public class MemberService {
     public void insert(Member member) {
         //POST 插入資料放body
         Optional<Member> checkId = memberRepository.findById(member.getId());//在原本的資料庫找member.getId()這筆
-        System.out.println(checkId.isPresent());
         if (!checkId.isPresent()) { //isPresent()= (checkId!=null)  //!checkId.isPresent()= x是空的
             memberRepository.save(member);
         } else {
@@ -125,11 +123,10 @@ public class MemberService {
 
     public void update(Member newMember) {
         Optional<Member> checkId = memberRepository.findById(newMember.getId());
-
-        if (!checkId.isPresent()) {
-            System.out.println("資料不存在");
-        } else {
+        if (checkId.isPresent()) {
             memberRepository.save(newMember);
+        } else {
+            System.out.println("資料不存在");
         }
     }
 

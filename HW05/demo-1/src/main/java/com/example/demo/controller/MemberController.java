@@ -44,9 +44,8 @@ public class MemberController {
     }
 
     @GetMapping("/rest/update")
-    public void update(@RequestBody Member updateMember, @RequestParam("id") String id) {
+    public void update(@RequestBody Member updateMember) {
         memberService.update(updateMember);
-        System.out.println(memberService.getStudent(id));
     }
 
     @GetMapping("/rest/delete")

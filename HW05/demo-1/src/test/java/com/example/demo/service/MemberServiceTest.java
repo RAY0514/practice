@@ -63,7 +63,6 @@ class MemberServiceTest {
         memberService.insert(member);
     }
 
-    //
     @DisplayName("更新資料")
     @Test
     void updata() {
