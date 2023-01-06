@@ -40,7 +40,7 @@ public class MemberController {
 
     @PostMapping("/rest/insert")
     public void insert(@RequestBody Member member) {
-        memberService.insert(member);//id
+        memberService.insert(member);
     }
 
     @GetMapping("/rest/update")

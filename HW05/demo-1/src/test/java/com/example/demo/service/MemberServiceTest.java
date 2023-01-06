@@ -53,12 +53,13 @@ class MemberServiceTest {
 
     @DisplayName("新增資料")
     @Test
-    void insert() {//資料一樣會變更新
+    void insert() {
         Member member = new Member();
-        member.setId("6");
-        member.setName("fffff");
+        member.setId("5");
+        member.setName("ray");
+        member.setGender("male");
         member.setClasses("456");
-        member.setAdmissionYearMonth("8798789797");
+        member.setAdmissionYearMonth("0906");
         memberService.insert(member);
     }
 
@@ -76,7 +77,7 @@ class MemberServiceTest {
     @DisplayName("刪除資料")
     @Test
     void delete() {
-        memberService.delete("6");
+        memberService.delete("5");
     }
 
     @DisplayName("特定學生資料抓取測試")
@@ -85,10 +86,4 @@ class MemberServiceTest {
         System.out.println(memberService.getStudentTest("5"));
     }
 
-//    @DisplayName("資料重複測試")
-//    @Test
-//    void repeatData() {
-//        memberService.repeatData("5");
-//
-//    }
 }

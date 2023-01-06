@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityExistsException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -62,7 +63,7 @@ public class MemberService {
         return studentList;
     }
 
-    public List<Member> getTeacher(String teacherId) {////抓不是老師的也可以,沒有資料會報錯
+    public List<Member> getTeacher(String teacherId) {
         // 根據輸入的ID取得教師資料
         List<Member> memberList = new ArrayList<>();
         try {
@@ -113,14 +114,13 @@ public class MemberService {
     //crud
     public void insert(Member member) {
         //POST 插入資料放body
-        if (repeatData(member) == false) {//沒有重複
+        Optional<Member> checkId = memberRepository.findById(member.getId());//在原本的資料庫找member.getId()這筆
+        System.out.println(checkId.isPresent());
+        if (!checkId.isPresent()) { //isPresent()= (checkId!=null)  //!checkId.isPresent()= x是空的
             memberRepository.save(member);
-            System.out.println("新增成功");
         } else {
-            System.out.println("資料id已存在");
+            System.out.println("此id已存在");
         }
-
-//        throw new EntityExistsException();
     }
 
     public void update(Member newMember) {
@@ -138,17 +138,6 @@ public class MemberService {
     public Member getStudentTest(String studentId) {
         // 根據輸入的ID取得學生資料
         return memberRepository.findMemberById(studentId);
-    }
-
-    public boolean repeatData(Member newMember) {
-        List<Member> idRepeatcheck = memberRepository.findAll();
-        for (Member oldMember : idRepeatcheck) {
-//            System.out.println(oldMember);
-            if (newMember.getId().equals(oldMember.getId())) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }
