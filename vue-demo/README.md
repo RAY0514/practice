@@ -1,4 +1,4 @@
-# vue-demo
+# moz-todo-vue
 
 ## Project setup
 ```
