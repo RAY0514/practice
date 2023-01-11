@@ -1,25 +1,23 @@
 <template>
-<!--  <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-  <HelloWorld/>
-<!--  <test/>-->
-
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<!--  <test-count/>-->
+<!--  <test-for/>-->
 </template>
 
 <script>
- import HelloWorld from './components/HelloWorld.vue'
-//匯入 ToDoItem 元件
-//import ToDoItem from './components/ToDoItem.vue'
- import test from './components/test.vue'
+import HelloWorld from './components/HelloWorld.vue'
+// import TestCount from './components/TestCount.vue'
+
+// import TestFor from './components/TestFor.vue'
 
 
- export default {
+
+export default {
   name: 'App',
   components: {
-    // //在components 註冊 HelloWorld 元件
-    // HelloWorld
-    // ToDoItem
     HelloWorld
-    // test
+    // TestCount
+    // TestFor
   }
 }
 </script>

@@ -1,4 +1,4 @@
-# moz-todo-vue
+# vuetest
 
 ## Project setup
 ```
