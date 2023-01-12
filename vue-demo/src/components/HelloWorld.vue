@@ -197,7 +197,7 @@ function clearButt() {
 const searchList = ref([])
 
 function search() {
-  this.searchList=[]
+  this.searchList = []
   let options = select.value
   let dataIndex = state.txt
 
@@ -217,10 +217,7 @@ function search() {
       alert("無此資料")
     }
   }
-
-
 }
-
 
 let select = ref("")
 
