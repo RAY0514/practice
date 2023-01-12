@@ -37,7 +37,6 @@
         name="text"
         required
         v-model="input.gender"
-
     />
     <br>
     <label class="form-label" for="input01">
@@ -47,7 +46,6 @@
         class="form-select"
         aria-label="select"
         v-model="input.select"
-        @change="selectChange"
     >
       {{ input.select }}
       <option selected value="teacher">
@@ -58,63 +56,64 @@
       </option>
     </select>
     <br>
-    <label class="form-label" for="input04" v-if="input.select== 'teacher'">
-      科目
-    </label>
-    <input
-        id="input04"
-        class="form-control"
-        type="text"
-        name="text"
-        required
-        v-model="input.subject"
-        v-if="input.select== 'teacher'"
-    />
-    <br>
-    <label class="form-label" for="input05" v-if="input.select== 'teacher'">
-      職位
-    </label>
-    <input
-        id="input05"
-        class="form-control"
-        type="text"
-        name="text"
-        required
-        v-model="input.jobTitle"
-        v-if="input.select== 'teacher'"
-    />
-    <br>
+    <div v-if="input.select== 'teacher'">
+      <label class="form-label" for="input04">
+        科目
+      </label>
+      <input
+          id="input04"
+          class="form-control"
+          type="text"
+          name="text"
+          required
+          v-model="input.subject"
+      />
+      <br>
+      <label class="form-label" for="input05">
+        職位
+      </label>
+      <input
+          id="input05"
+          class="form-control"
+          type="text"
+          name="text"
+          required
+          v-model="input.jobTitle"
+      />
+      <br>
+    </div>
 
-    <label class="form-label" for="input06" v-if="input.select=='student'">
-      班級
-    </label>
-    <input
-        id="input06"
-        class="form-control"
-        type="text"
-        name="text"
-        required
-        v-model="input.class"
-        v-if="input.select== 'student'"
-    />
-    <br>
-    <label class="form-label" for="input07" v-if="input.select== 'student'">
-      入學年度
-    </label>
-    <input
-        id="input07"
-        class="form-control"
-        type="text"
-        name="text"
-        required
-        v-model="input.admissionYearMonth"
-        v-if="input.select== 'student'"
-    />
+    <div v-if="input.select== 'student'">
+      <label class="form-label" for="input06">
+        班級
+      </label>
+      <input
+          id="input06"
+          class="form-control"
+          type="text"
+          name="text"
+          required
+          v-model="input.class"
+      />
+      <br>
+      <label class="form-label" for="input07">
+        入學年度
+      </label>
+      <input
+          id="input07"
+          class="form-control"
+          type="text"
+          name="text"
+          required
+          v-model="input.admissionYearMonth"
+      />
+    </div>
   </div>
   <br>
   <button
       type="button"
       class="btn btn-primary"
+      @click="clear()"
   >
     清除
   </button>
@@ -125,7 +124,6 @@
   >
     新增
   </button>
-  {{ searchList }}
   {{ input.select }}
 </template>
 
@@ -163,6 +161,16 @@ function insert() {
     searchList.value.push(input.admissionYearMonth)
   }
   console.log(searchList.value)
+}
+
+function clear() {
+  input.num="",
+  input.name="",
+  input.gender="",
+  input.subject="",
+  input.jobTitle="",
+  input.class="",
+  input.admissionYearMonth=""
 }
 
 </script>
