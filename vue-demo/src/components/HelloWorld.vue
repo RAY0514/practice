@@ -22,7 +22,7 @@
         aria-label="select"
         v-model="select"
     >
-      <option disabled value="">
+      <option value="">
         無
       </option>
       <option value="teacher">
@@ -73,37 +73,17 @@
       <th class="white-space-nowrap">
         入學年度
       </th>
+      <th>
+        刪除
+      </th>
+
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>
-        1
-      </td>
-      <td>
-        jacky
-      </td>
-      <td>
-        男
-      </td>
-      <td>
-        無
-      </td>
-      <td>
-        無
-      </td>
-      <td>
-        301
-      </td>
-      <td>
-        201910
-      </td>
-    </tr>
-    </tbody>
-    <tbody>
-    <tr v-for="member in searchList"
+    <tr v-for="(member,index) in searchList"
         v-bind:key="member"
-        v-bind:todo="member">
+        v-bind:todo="member"
+    >
       <td>
         {{ member.id }}
       </td>
@@ -125,11 +105,15 @@
       <td>
         {{ member.admissionYearMonth }}
       </td>
+      <td>
+        <button @click="deletee(index)">
+          刪除
+        </button>
+      </td>
     </tr>
     </tbody>
-    <tbody>
-    </tbody>
   </table>
+
 
 </template>
 
@@ -230,6 +214,8 @@ let select = ref("")
 //   } else {
 //     console.log("全部資料")
 //   }
-
-// }
+// //}
+function deletee(index) {
+  console.log(searchList.value[index].id)
+}
 </script>
