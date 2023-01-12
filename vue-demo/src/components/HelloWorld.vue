@@ -197,6 +197,7 @@ function clearButt() {
 const searchList = ref([])
 
 function search() {
+  this.searchList=[]
   let options = select.value
   let dataIndex = state.txt
 
