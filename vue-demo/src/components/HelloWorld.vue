@@ -171,7 +171,7 @@ const members = reactive({
   ]
 })
 
-var state = reactive({txt: ""})
+var state = reactive({txt})
 
 function clearButt() {
   state.txt = ""
