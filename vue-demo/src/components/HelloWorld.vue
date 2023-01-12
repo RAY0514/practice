@@ -21,9 +21,8 @@
         class="form-select"
         aria-label="select"
         v-model="select"
-        @change="selectData()"
     >
-      <option selected>
+      <option disabled value="">
         無
       </option>
       <option value="teacher">
@@ -198,28 +197,41 @@ function clearButt() {
 const searchList = ref([])
 
 function search() {
-  console.log(state.txt)
+  let options = select.value
   let dataIndex = state.txt
-  if (dataIndex-1 < members.actionList.length) {
-    console.log(members.actionList[dataIndex])
-    searchList.value.push(members.actionList[dataIndex -1])
+
+  if (options == "teacher" && dataIndex == "") {//是老師
+    console.log("全部老師")
+  } else if (options == "student" && dataIndex == "") {
+    console.log("全部學生")
+  } else if (options == "" && (dataIndex == "")) {
+    console.log("全部資料")
+    for (let i = 0; i < members.actionList.length; i++)
+      searchList.value.push(members.actionList[i])
   } else {
-    alert("無此資料")
+    if (dataIndex - 1 < members.actionList.length) {
+      console.log(members.actionList[dataIndex])
+      searchList.value.push(members.actionList[dataIndex - 1])
+    } else {
+      alert("無此資料")
+    }
   }
+
+
 }
 
 
 let select = ref("")
 
-function selectData() {
-  let options = select.value
-  if (options == "teacher") {//是老師
-    console.log("全部老師")
-  } else if (options == "student") {
-    console.log("全部學生")
-  }else {
-    console.log("全部資料")
-  }
+// function selectData() {
+//   let options = select.value
+//   if (options == "teacher") {//是老師
+//     console.log("全部老師")
+//   } else if (options == "student") {
+//     console.log("全部學生")
+//   } else {
+//     console.log("全部資料")
+//   }
 
-}
+// }
 </script>
