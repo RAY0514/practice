@@ -1,26 +1,16 @@
 <template>
-<!--  <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-<!--  <test-count/>-->
-<!--  <test-for/>-->
-<new-hello-world></new-hello-world>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import TestCount from './components/TestCount.vue'
-
-// import TestFor from './components/TestFor.vue'
-import newHelloWorld from './components/newHelloWorld.vue'
-
+import HelloWorld from './components/HelloWorld.vue'
 
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld
-    // TestCount
-    // TestFor
-    newHelloWorld
+    HelloWorld
   }
 }
 </script>

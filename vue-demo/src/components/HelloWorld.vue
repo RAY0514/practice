@@ -1,221 +1,58 @@
 <template>
-  <h1>查詢功能</h1>
-  <div class="input-item">
-    <label class="form-label" for="input01">
-      學號
-    </label>
-    <input
-        id="input01"
-        class="form-control"
-        type="text"
-        name="text"
-        required
-        v-model.number="state.txt"
-    />
-    <br>
-    <label class="form-label" for="input01">
-      職位{{ select.value }}
-    </label>
-    <!--  v-model  選單裡面選甚麼 selected 的值就是什麼 -->
-    <select
-        class="form-select"
-        aria-label="select"
-        v-model="select"
-    >
-      <option value="">
-        無
-      </option>
-      <option value="teacher">
-        老師
-      </option>
-      <option value="student">
-        學生
-      </option>
-    </select>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
+    <p>
+      For a guide and recipes on how to configure / customize this project,<br>
+      check out the
+      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
+    </p>
+    <h3>Installed CLI Plugins</h3>
+    <ul>
+      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
+      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
+    </ul>
+    <h3>Essential Links</h3>
+    <ul>
+      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
+      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
+      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
+      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
+      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
+    </ul>
+    <h3>Ecosystem</h3>
+    <ul>
+      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
+      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
+      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
+      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
+      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
+    </ul>
   </div>
-  <br>
-  <button
-      type="button"
-      class="btn btn-primary"
-      @click="clearButt()"
-  >
-    清除
-  </button>
-  <button
-      type="button"
-      class="btn btn-primary"
-      @click="search()"
-  >
-    查詢
-  </button>
-  <br><br><br><br><br>
-  <table style="margin-left: auto;margin-right: auto;">
-    <thead>
-    <tr>
-      <th class="white-space-nowrap">
-        學號
-      </th>
-      <th class="white-space-nowrap">
-        姓名
-      </th>
-      <th class="white-space-nowrap">
-        性別
-      </th>
-      <th class="white-space-nowrap">
-        科目
-      </th>
-      <th class="white-space-nowrap">
-        職位
-      </th>
-      <th class="white-space-nowrap">
-        班級
-      </th>
-      <th class="white-space-nowrap">
-        入學年度
-      </th>
-      <th>
-        刪除
-      </th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="(member,index) in searchList"
-        v-bind:key="member"
-        v-bind:todo="member"
-    >
-      <td>
-        {{ member.id }}
-      </td>
-      <td>
-        {{ member.name }}
-      </td>
-      <td>
-        {{ member.gender }}
-      </td>
-      <td>
-        {{ member.subject }}
-      </td>
-      <td>
-        {{ member.jobTitle }}
-      </td>
-      <td>
-        {{ member.classes }}
-      </td>
-      <td>
-        {{ member.admissionYearMonth }}
-      </td>
-      <td>
-        <button @click="deletee(index)">
-          刪除
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
-
 </template>
 
-<script setup>
-//https://book.vue.tw/CH1/1-2-instance.html
-
-import {reactive, ref} from 'vue'
-//
-// export default {
-//   name: 'HelloWorld',
-//   props: {
-//     msg: String
-//   },
-//
-
-const members = reactive({
-  actionList: [
-    {
-      id: "1",
-      name: "Billy",
-      gender: "male",
-      subject: "數學",
-      jobTitle: "教務主任",
-      classes: "無",
-      admissionYearMonth: "無"
-    },
-    {
-      id: "2",
-      name: "Heidi",
-      gender: "female",
-      subject: "英文",
-      jobTitle: "教師",
-      classes: "無",
-      admissionYearMonth: "無"
-    },
-    {
-      id: "3",
-      name: "jacky",
-      gender: "male",
-      subject: "無",
-      jobTitle: "無",
-      classes: "301",
-      admissionYearMonth: "201910"
-    },
-    {
-      id: "4",
-      name: "Lawrence",
-      gender: "male",
-      subject: "無",
-      jobTitle: "無",
-      classes: "801",
-      admissionYearMonth: "201812"
-    },
-
-  ]
-})
-
-var state = reactive({txt})
-
-function clearButt() {
-  state.txt = ""
-  this.searchList = []
-}
-
-const searchList = ref([])
-
-function search() {
-  this.searchList = []
-  let options = select.value
-  let dataIndex = state.txt
-
-  if (options == "teacher" && dataIndex == "") {//是老師
-    console.log("全部老師")
-  } else if (options == "student" && dataIndex == "") {
-    console.log("全部學生")
-  } else if (options == "" && (dataIndex == "")) {
-    console.log("全部資料")
-    for (let i = 0; i < members.actionList.length; i++)
-      searchList.value.push(members.actionList[i])
-  } else {
-    if (dataIndex - 1 < members.actionList.length) {
-      console.log(members.actionList[dataIndex])
-      searchList.value.push(members.actionList[dataIndex - 1])
-    } else {
-      alert("無此資料")
-    }
+<script>
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
   }
 }
-
-let select = ref("")
-
-// function selectData() {
-//   let options = select.value
-//   if (options == "teacher") {//是老師
-//     console.log("全部老師")
-//   } else if (options == "student") {
-//     console.log("全部學生")
-//   } else {
-//     console.log("全部資料")
-//   }
-// //}
-function deletee(index) {
-  console.log(searchList.value[index].id)
-}
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>

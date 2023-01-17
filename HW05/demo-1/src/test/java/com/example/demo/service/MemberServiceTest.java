@@ -12,7 +12,6 @@ class MemberServiceTest {
     @Autowired
     MemberService memberService;
 
-
     @DisplayName("全部資料抓取")
     @Test
     void getAllMember() {

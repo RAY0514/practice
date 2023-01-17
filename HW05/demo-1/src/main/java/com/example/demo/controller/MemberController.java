@@ -3,9 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.entity.Member;
 import com.example.demo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class MemberController {
@@ -14,33 +13,38 @@ public class MemberController {
     MemberService memberService;
 
     @GetMapping("/rest/getAllMember")
-    public List<Member> getAllMember() {
-        return memberService.getAllMember();
+    public ResponseEntity<?> getAllMember() {
+
+//        return memberService.getAllMember();
+        return ResponseEntity.ok().header("Access-Control-Allow-Origin", "*").body(memberService.getAllMember());
     }
 
     @GetMapping("/rest/all-teacher")
-    public List<Member> getAllTeacher() {
-        return memberService.getAllTeacher();
+    public ResponseEntity<?> getAllTeacher() {
+        return ResponseEntity.ok().header("Access-Control-Allow-Origin", "*").body(memberService.getAllTeacher());
     }
 
     @GetMapping("/rest/all-student")
-    public List<Member> getAllStudent() {
-        return memberService.getAllStudent();
+    public ResponseEntity<?> getAllStudent() {
+        return ResponseEntity.ok().header("Access-Control-Allow-Origin", "*").body(memberService.getAllStudent());
     }
 
     @GetMapping("/rest/getTeacher")
-    public List<Member> getTeacher(@RequestParam("id") String id) {
-        return memberService.getTeacher(id);
+    public ResponseEntity<?> getTeacher(@RequestParam("id") String id) {
+        return ResponseEntity.ok().header("Access-Control-Allow-Origin", "*").body(memberService.getTeacher(id));
     }
 
     @GetMapping("/rest/getStudent")
-    public List<Member> getStudent(@RequestParam("id") String id) {
-        return memberService.getStudent(id);
+    public ResponseEntity<?> getStudent(@RequestParam("id") String id) {
+        return ResponseEntity.ok().header("Access-Control-Allow-Origin", "*").body(memberService.getStudent(id));
     }
 
     @PostMapping("/rest/insert")
-    public void insert(@RequestBody Member member) {
+    @CrossOrigin
+    public ResponseEntity<?> insert(@RequestBody Member member) {
         memberService.insert(member);
+        System.out.println("here");
+        return ResponseEntity.ok().body("ok");
     }
 
     @GetMapping("/rest/update")
@@ -48,8 +52,11 @@ public class MemberController {
         memberService.update(updateMember);
     }
 
-    @GetMapping("/rest/delete")
-    public void delete(@RequestParam("id") String id) {
+    @DeleteMapping("/rest/delete")
+    @CrossOrigin
+    public ResponseEntity<?> delete(@RequestParam("id") String id) {
         memberService.delete(id);
+        return ResponseEntity.ok().body("ok");
+
     }
 }
