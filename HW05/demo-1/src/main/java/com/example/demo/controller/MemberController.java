@@ -47,7 +47,8 @@ public class MemberController {
         return ResponseEntity.ok().body("ok");
     }
 
-    @GetMapping("/rest/update")
+    @PutMapping("/rest/update")
+    @CrossOrigin
     public void update(@RequestBody Member updateMember) {
         memberService.update(updateMember);
     }

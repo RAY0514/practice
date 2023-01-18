@@ -74,7 +74,7 @@
         入學年度
       </th>
       <th>
-      功能
+        功能
       </th>
     </tr>
     </thead>
@@ -85,7 +85,7 @@
         v-bind:todo="member"
     >
       <td>
-        {{ member.id }}{{"這是index"+index}}
+        {{ member.id }}
       </td>
       <td>
         {{ member.name }}
@@ -109,25 +109,32 @@
         <button @click="deletee(index)">
           刪除
         </button>
-
-          <router-link to="/editPage">
+        <router-link :to="{path:'/editPage',query:{
+          id:member.id,
+          name:member.name,
+          gender:member.gender,
+          subject:member.subject,
+          jobTitle:member.jobTitle,
+          class:member.classes,
+          admissionYearMonth:member.admissionYearMonth,
+        }}">
+          <!--        <router-link to="/editPage">-->
           <button>
-          編輯
-        </button>
-          </router-link>
+            編輯
+          </button>
+        </router-link>
       </td>
     </tr>
     </tbody>
   </table>
-
-  {{memberList}}
-
+  {{ searchList }}
 </template>
 
 
 <script setup>
 import {reactive, ref} from 'vue'
 import axios from 'axios'
+import {useRouter} from "vue-router";
 
 //https://book.vue.tw/CH1/1-2-instance.html
 //路由https://cn.vuejs.org/guide/scaling-up/routing.html#simple-routing-from-scratch
@@ -159,6 +166,7 @@ const backDataAllStudent = axios  // eslint-disable-line no-unused-vars
     .then(({data}) => {
       // console.log(data)
       studentList = data
+
     })
 
 const showTitle = ref(false)
@@ -257,8 +265,8 @@ function clearButt() {
 
 const searchList = ref([])
 
-function search(){
-  this.showTitle=true
+function search() {
+  this.showTitle = true
   this.searchList = []//資料渲染list
   let options = select.value//選擇框
   let dataIndex = state.txt//輸入框
@@ -278,6 +286,8 @@ function search(){
     console.log("全部資料")
     for (let i = 0; i < memberList.length; i++) {
       searchList.value.push(memberList[i])
+      // searchList.value.forEach(a()=>console.log(a))
+      console.log("adasd"+searchList.value)
     }
   } else {
     if (dataIndex - 1 < memberList.length) {
@@ -289,16 +299,31 @@ function search(){
 }
 
 let select = ref("")
+
 //刪除index對不上
 function deletee(index) {
   console.log(searchList.value[index])
   this.showTitle = false
-  this.searchList=[]
+  this.searchList = []
 
-    axios.delete("http://localhost:8081/rest/delete?id=6")
-        .then(res => {
-          console.log(res.data);
-        });
+  axios.delete("http://localhost:8081/rest/delete?id=6")
+      .then(res => {
+        console.log(res.data);
+      });
 }
 
+
+
+// const router = useRouter(); //<-- router declared outside function: CORRECT
+// const enterChat = () => {
+//   router.push({ name: "Chatroom" });
+// };
+//
+// const router = new VueRouter({
+//   routes: [
+//     { path: '/user/:id', component: User }
+//   ]
+// })
+// const router = useRouter()
+// router.push({name: "23"})
 </script>

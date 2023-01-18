@@ -46,8 +46,8 @@
         class="form-select"
         aria-label="select"
         v-model="input.select"
+
     >
-      {{ input.select }}
       <option selected value="teacher">
         老師
       </option>
@@ -110,32 +110,39 @@
     </div>
   </div>
   <br>
+  <router-link to= "/">
   <button
       type="button"
       class="btn btn-primary"
-      @click="clear()"
   >
-    清除
+    返回
   </button>
+  </router-link>
   <button
       type="button"
       class="btn btn-primary"
-      @click="insert()"
+      @click="updata()"
   >
-    新增
+    更新
   </button>
-  {{ input.select }}
+
 </template>
 
 <script setup>
+
+
+//搜索資料後點擊編輯跳進編輯網頁原本的資料塞進輸入框
+
 // export default {
 //   name: 'insertPage.vue',
 //   props: {
 //     msg: String
 //   }
 // }
-import {reactive} from 'vue'
+import {reactive, ref} from 'vue'
 import axios from "axios";
+import router from "@/router";
+import {useRoute} from "vue-router";
 
 const input = reactive({
   num: "",
@@ -147,43 +154,75 @@ const input = reactive({
   admissionYearMonth: "",
   select: ""
 })
+//
+// function insert() {
+//   if (input.num == "") {
+//     alert("請輸入學號")
+//   } else {
+//     axios
+//         .post("http://localhost:8081/rest/insert",
+//             {
+//               id: input.num,
+//               name: input.name,
+//               gender: input.gender,
+//               subject: input.subject,
+//               jobTitle: input.jobTitle,
+//               admissionYearMonth: input.admissionYearMonth,
+//               class: input.class
+//             }
+//         )
+//         .then(response => {
+//           console.log(response.status)
+//           if (response.status == 200) {
+//             alert("新增成功")
+//           } else {
+//             alert("新增失敗")
+//
+//           }
+//         })
+//   }
+// }
 
-function insert() {
-  if (input.num == "") {
-    alert("請輸入學號")
-  } else {
-    axios
-        .post("http://localhost:8081/rest/insert",
-            {
-              id: input.num,
-              name: input.name,
-              gender: input.gender,
-              subject: input.subject,
-              jobTitle: input.jobTitle,
-              admissionYearMonth: input.admissionYearMonth,
-              class: input.class
-            }
-        )
-        .then(response => {
-          console.log(response.status)
-          if (response.status == 200) {
-            alert("新增成功")
-          } else {
-            alert("新增失敗")
+//取url的值
+const route = useRoute()
+console.log(route.query.name)
+input.num = route.query.id,
+    input.name = route.query.name,
+    input.gender = route.query.gender,
+    input.subject = route.query.subject,
+    input.jobTitle = route.query.jobTitle,
+    input.class = route.query.class,
+    input.admissionYearMonth = route.query.admissionYearMonth
 
-          }
-        })
-  }
+
+if (input.subject != null) {
+  input.select = "teacher"
+} else {
+  input.select = "student"
 }
 
-function clear() {
-  input.num = "",
-      input.name = "",
-      input.gender = "",
-      input.subject = "",
-      input.jobTitle = "",
-      input.class = "",
-      input.admissionYearMonth = ""
+
+function updata() {
+  axios
+      .put("http://localhost:8081/rest/update",
+          {
+            id: input.num,
+            name: input.name,
+            gender: input.gender,
+            subject: input.subject,
+            jobTitle: input.jobTitle,
+            admissionYearMonth: input.admissionYearMonth,
+            classes: input.class
+          })
+      .then(response => {
+        console.log(response.status)
+        if (response.status == 200) {
+          alert("成功")
+        }
+      })
 }
+
+
+
 
 </script>

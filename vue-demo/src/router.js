@@ -13,13 +13,13 @@ const routers = [
     {
         path: '/insertPage',
         name: insertPage,
-        component: insertPage
+        component: insertPage,
 
     },
     {
         path: '/editPage',
         name: editPage,
-        component: editPage
+        component: editPage,
 
     },
 ]

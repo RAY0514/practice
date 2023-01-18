@@ -125,6 +125,8 @@
     新增
   </button>
   {{ input.select }}
+
+
 </template>
 
 <script setup>
@@ -185,5 +187,7 @@ function clear() {
       input.class = "",
       input.admissionYearMonth = ""
 }
+
+
 
 </script>
