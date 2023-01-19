@@ -117,6 +117,8 @@
   >
     清除
   </button>
+
+  <router-link to="/">
   <button
       type="button"
       class="btn btn-primary"
@@ -124,8 +126,7 @@
   >
     新增
   </button>
-  {{ input.select }}
-
+  </router-link>
 
 </template>
 
@@ -138,6 +139,7 @@
 // }
 import {reactive} from 'vue'
 import axios from "axios";
+import {useRouter} from "vue-router";
 
 const input = reactive({
   num: "",
@@ -150,6 +152,7 @@ const input = reactive({
   select: ""
 })
 
+const router=useRouter()
 function insert() {
   if (input.num == "") {
     alert("請輸入學號")
@@ -168,6 +171,7 @@ function insert() {
         )
         .then(response => {
           console.log(response.status)
+          router.go(0)
           if (response.status == 200) {
             alert("新增成功")
           } else {
@@ -187,7 +191,5 @@ function clear() {
       input.class = "",
       input.admissionYearMonth = ""
 }
-
-
 
 </script>

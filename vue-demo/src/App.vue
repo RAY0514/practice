@@ -10,21 +10,24 @@
 
 </template>
 
-<script>
+<script setup>
 // import searchMember from './components/searchMember.vue'
 // import insertPage from './components/insertPage.vue'
+//
+// export default {
+//   name: 'App',
+//   components: {
+//     searchMember, // eslint-disable-line no-unused-vars
+//
+//     insertPage// eslint-disable-line no-unused-vars
+//
+//
+//
+//   }
+// }
+import {provide, ref, nextTick} from 'vue'
+const isRouterAlive = ref(true)
 
-export default {
-  name: 'App',
-  components: {
-    // searchMember, // eslint-disable-line no-unused-vars
-    //
-    // insertPage// eslint-disable-line no-unused-vars
-
-
-
-  }
-}
 </script>
 
 <style>

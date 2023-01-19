@@ -80,7 +80,7 @@
     </thead>
 
     <tbody>
-    <tr v-for="(member,index) in searchList"
+    <tr v-for="(member) in searchList"
         v-bind:key="member"
         v-bind:todo="member"
     >
@@ -93,22 +93,33 @@
       <td>
         {{ member.gender }}
       </td>
-      <td>
+
+      <td v-if="member.subject !=null">
         {{ member.subject }}
       </td>
-      <td>
+      <td v-else>無</td>
+
+      <td v-if="member.jobTitle !=null">
         {{ member.jobTitle }}
       </td>
-      <td>
+      <td v-else>無</td>
+
+      <td v-if="member.classes !=null">
         {{ member.classes }}
       </td>
-      <td>
+      <td v-else>無</td>
+
+      <td v-if="member.admissionYearMonth !=null">
         {{ member.admissionYearMonth }}
       </td>
+      <td v-else>無</td>
+
       <td>
-        <button @click="deletee(index)">
+
+        <button @click="deleteMember(member.id)">
           刪除
         </button>
+
         <router-link :to="{path:'/editPage',query:{
           id:member.id,
           name:member.name,
@@ -127,7 +138,6 @@
     </tr>
     </tbody>
   </table>
-  {{ searchList }}
 </template>
 
 
@@ -141,7 +151,6 @@ import {useRouter} from "vue-router";
 //http://localhost:8081/rest/getAllMember
 
 //全部資料
-
 let memberList = reactive([])
 const backData = axios  // eslint-disable-line no-unused-vars
     .get("http://localhost:8081/rest/getAllMember")
@@ -171,90 +180,47 @@ const backDataAllStudent = axios  // eslint-disable-line no-unused-vars
 
 const showTitle = ref(false)
 
-// teacherList.forEach((teacher,index) => {
-//   // has access to outer scope `parentMessage`
-//   // but `item` and `index` are only available in here
-//   console.log( teacher.message, index)
-// })
-// const  backData= axios  // eslint-disable-line no-unused-vars
-//     .get("http://localhost:8081/rest/getAllMember")
-//     .then(({ data }) => {
-//       console.log(data)
-//       searchList.value.push(data)
-//     })
-// const  backData= axios  // eslint-disable-line no-unused-vars
-//     .get("http://localhost:8081/rest/getAllMember")
-//     .then(({ data }) => {
-//       console.log(data)
-//       searchList.value.push(data)
-//     })
-
-
-/*
-路由
- */
-// const  routes={
-//   '/': insertPage
-// }
-// const currentPath = ref(window.location.hash)
-// window.addEventListener('hashchange', () => {
-//   currentPath.value = window.location.hash
-// })
+// const members = reactive({ // eslint-disable-line no-unused-vars
+//   actionList: [
+//     {
+//       id: "1",
+//       name: "Billy",
+//       gender: "male",
+//       subject: "數學",
+//       jobTitle: "教務主任",
+//       classes: "無",
+//       admissionYearMonth: "無"
+//     },
+//     {
+//       id: "2",
+//       name: "Heidi",
+//       gender: "female",
+//       subject: "英文",
+//       jobTitle: "教師",
+//       classes: "無",
+//       admissionYearMonth: "無"
+//     },
+//     {
+//       id: "3",
+//       name: "jacky",
+//       gender: "male",
+//       subject: "無",
+//       jobTitle: "無",
+//       classes: "301",
+//       admissionYearMonth: "201910"
+//     },
+//     {
+//       id: "4",
+//       name: "Lawrence",
+//       gender: "male",
+//       subject: "無",
+//       jobTitle: "無",
+//       classes: "801",
+//       admissionYearMonth: "201812"
+//     },
 //
-// const currentView = computed(() => {
-//   return routes[currentPath.value.slice(1) || '/']
+//   ]
 // })
-
-//
-// export default {
-//   name: 'searchMember',
-//   props: {
-//     msg: String
-//   }
-// }
-
-
-const members = reactive({ // eslint-disable-line no-unused-vars
-  actionList: [
-    {
-      id: "1",
-      name: "Billy",
-      gender: "male",
-      subject: "數學",
-      jobTitle: "教務主任",
-      classes: "無",
-      admissionYearMonth: "無"
-    },
-    {
-      id: "2",
-      name: "Heidi",
-      gender: "female",
-      subject: "英文",
-      jobTitle: "教師",
-      classes: "無",
-      admissionYearMonth: "無"
-    },
-    {
-      id: "3",
-      name: "jacky",
-      gender: "male",
-      subject: "無",
-      jobTitle: "無",
-      classes: "301",
-      admissionYearMonth: "201910"
-    },
-    {
-      id: "4",
-      name: "Lawrence",
-      gender: "male",
-      subject: "無",
-      jobTitle: "無",
-      classes: "801",
-      admissionYearMonth: "201812"
-    },
-
-  ]
-})
 
 var state = reactive({txt: ""})
 
@@ -287,7 +253,6 @@ function search() {
     for (let i = 0; i < memberList.length; i++) {
       searchList.value.push(memberList[i])
       // searchList.value.forEach(a()=>console.log(a))
-      console.log("adasd"+searchList.value)
     }
   } else {
     if (dataIndex - 1 < memberList.length) {
@@ -298,32 +263,21 @@ function search() {
   }
 }
 
+
 let select = ref("")
+const  router= useRouter()
 
 //刪除index對不上
-function deletee(index) {
+function deleteMember(index) {
   console.log(searchList.value[index])
   this.showTitle = false
   this.searchList = []
-
-  axios.delete("http://localhost:8081/rest/delete?id=6")
+console.log(index)
+  axios.delete("http://localhost:8081/rest/delete?id="+index)
       .then(res => {
         console.log(res.data);
+        router.go(0)
       });
 }
 
-
-
-// const router = useRouter(); //<-- router declared outside function: CORRECT
-// const enterChat = () => {
-//   router.push({ name: "Chatroom" });
-// };
-//
-// const router = new VueRouter({
-//   routes: [
-//     { path: '/user/:id', component: User }
-//   ]
-// })
-// const router = useRouter()
-// router.push({name: "23"})
 </script>

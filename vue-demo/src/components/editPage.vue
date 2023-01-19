@@ -110,28 +110,27 @@
     </div>
   </div>
   <br>
-  <router-link to= "/">
-  <button
-      type="button"
-      class="btn btn-primary"
-  >
-    返回
-  </button>
+  <router-link to="/">
+    <button
+        type="button"
+        class="btn btn-primary"
+    >
+      返回
+    </button>
   </router-link>
-  <button
-      type="button"
-      class="btn btn-primary"
-      @click="updata()"
-  >
-    更新
-  </button>
+  <router-link to="/">
+    <button
+        type="button"
+        class="btn btn-primary"
+        @click="updata()"
+    >
+      更新
+    </button>
+  </router-link>
 
 </template>
 
 <script setup>
-
-
-//搜索資料後點擊編輯跳進編輯網頁原本的資料塞進輸入框
 
 // export default {
 //   name: 'insertPage.vue',
@@ -141,7 +140,6 @@
 // }
 import {reactive, ref} from 'vue'
 import axios from "axios";
-import router from "@/router";
 import {useRoute} from "vue-router";
 
 const input = reactive({
@@ -154,34 +152,6 @@ const input = reactive({
   admissionYearMonth: "",
   select: ""
 })
-//
-// function insert() {
-//   if (input.num == "") {
-//     alert("請輸入學號")
-//   } else {
-//     axios
-//         .post("http://localhost:8081/rest/insert",
-//             {
-//               id: input.num,
-//               name: input.name,
-//               gender: input.gender,
-//               subject: input.subject,
-//               jobTitle: input.jobTitle,
-//               admissionYearMonth: input.admissionYearMonth,
-//               class: input.class
-//             }
-//         )
-//         .then(response => {
-//           console.log(response.status)
-//           if (response.status == 200) {
-//             alert("新增成功")
-//           } else {
-//             alert("新增失敗")
-//
-//           }
-//         })
-//   }
-// }
 
 //取url的值
 const route = useRoute()
@@ -194,13 +164,11 @@ input.num = route.query.id,
     input.class = route.query.class,
     input.admissionYearMonth = route.query.admissionYearMonth
 
-
 if (input.subject != null) {
   input.select = "teacher"
 } else {
   input.select = "student"
 }
-
 
 function updata() {
   axios
@@ -221,8 +189,4 @@ function updata() {
         }
       })
 }
-
-
-
-
 </script>
