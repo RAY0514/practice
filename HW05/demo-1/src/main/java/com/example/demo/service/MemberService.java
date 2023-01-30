@@ -21,9 +21,9 @@ public class MemberService {
     public List<Member> getAllMember() {
         List<Member> memberList = new ArrayList<>();
         for (Member teacherMember : getAllTeacher()) {//放老師
-            memberList.add(teacherMember);
+            x.add(teacherMember);
         }
-        for (Member studentMember : getAllStudent()) {//放老師
+        for (Member studentMember : getAllStudent()) {//放學生
             memberList.add(studentMember);
         }
         return memberList;
@@ -114,7 +114,7 @@ public class MemberService {
     public void insert(Member member) {
         //POST 插入資料放body
         Optional<Member> checkId = memberRepository.findById(member.getId());//在原本的資料庫找member.getId()這筆
-        if (!checkId.isPresent()) { //isPresent()= (checkId!=null)  //!checkId.isPresent()= x是空的
+        if (!checkId.isPresent()) { //isPresent()= (checkId!=null)  //!checkId.isPresent() =>check是空的
             memberRepository.save(member);
         } else {
             System.out.println("此id已存在");

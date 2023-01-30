@@ -16,6 +16,7 @@ public class MemberController {
     public ResponseEntity<?> getAllMember() {
 
 //        return memberService.getAllMember();
+        System.out.println(memberService.getAllMember().size());
         return ResponseEntity.ok().header("Access-Control-Allow-Origin", "*").body(memberService.getAllMember());
     }
 

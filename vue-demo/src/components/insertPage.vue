@@ -46,6 +46,7 @@
         class="form-select"
         aria-label="select"
         v-model="input.select"
+        @change="selectChang"
     >
       {{ input.select }}
       <option selected value="teacher">
@@ -117,8 +118,6 @@
   >
     清除
   </button>
-
-  <router-link to="/">
   <button
       type="button"
       class="btn btn-primary"
@@ -126,8 +125,6 @@
   >
     新增
   </button>
-  </router-link>
-
 </template>
 
 <script setup>
@@ -137,26 +134,43 @@
 //     msg: String
 //   }
 // }
-import {reactive} from 'vue'
+import {reactive, ref, vModelSelect} from 'vue'
 import axios from "axios";
 import {useRouter} from "vue-router";
 
 const input = reactive({
-  num: "",
-  name: "",
-  gender: "",
-  subject: "",
-  jobTitle: "",
-  class: "",
-  admissionYearMonth: "",
-  select: ""
+  num: null,
+  name: null,
+  gender: null,
+  subject: null,
+  jobTitle: null,
+  class: null,
+  admissionYearMonth: null,
+  select: null
 })
 
-const router=useRouter()
+let memberList = reactive([])
+const backData = axios  // eslint-disable-line no-unused-vars
+    .get("http://localhost:8081/rest/getAllMember")
+    .then(({data}) => {
+      console.log(data)
+      memberList = data
+    })
+
+
+const router = useRouter()
+
 function insert() {
   if (input.num == "") {
     alert("請輸入學號")
-  } else {
+  } else if (input.num != "") {
+    for (let i = 0; i < memberList.length; i++) {
+      console.log(memberList[i].id)
+      if (memberList[i].id == input.num) {
+        alert("此筆資料已存在")
+        return;
+      }
+    }
     axios
         .post("http://localhost:8081/rest/insert",
             {
@@ -166,21 +180,24 @@ function insert() {
               subject: input.subject,
               jobTitle: input.jobTitle,
               admissionYearMonth: input.admissionYearMonth,
-              class: input.class
+              classes: input.class
             }
         )
         .then(response => {
           console.log(response.status)
+          console.log(response.data)
           router.go(0)
           if (response.status == 200) {
             alert("新增成功")
           } else {
             alert("新增失敗")
-
           }
         })
+    router.push({path: "/"})
   }
+
 }
+
 
 function clear() {
   input.num = "",
@@ -190,6 +207,16 @@ function clear() {
       input.jobTitle = "",
       input.class = "",
       input.admissionYearMonth = ""
+}
+
+function selectChang () {
+  if(input.select!=""){
+    input.subject = null,
+        input.jobTitle = null,
+        input.class = null,
+        input.admissionYearMonth = null
+  }
+
 }
 
 </script>

@@ -12,7 +12,7 @@
         name="text"
         required
         v-model="input.num"
-
+        disabled
     />
     <br>
     <label class="form-label" for="input02">
@@ -141,6 +141,7 @@
 import {reactive, ref} from 'vue'
 import axios from "axios";
 import {useRoute} from "vue-router";
+import router from "@/router";
 
 const input = reactive({
   num: "",
@@ -184,6 +185,7 @@ function updata() {
           })
       .then(response => {
         console.log(response.status)
+        router.go(0)
         if (response.status == 200) {
           alert("成功")
         }

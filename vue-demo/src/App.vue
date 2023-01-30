@@ -11,6 +11,7 @@
 </template>
 
 <script setup>
+
 // import searchMember from './components/searchMember.vue'
 // import insertPage from './components/insertPage.vue'
 //
@@ -25,8 +26,6 @@
 //
 //   }
 // }
-import {provide, ref, nextTick} from 'vue'
-const isRouterAlive = ref(true)
 
 </script>
 

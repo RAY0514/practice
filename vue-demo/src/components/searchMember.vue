@@ -115,7 +115,6 @@
       <td v-else>無</td>
 
       <td>
-
         <button @click="deleteMember(member.id)">
           刪除
         </button>
@@ -138,6 +137,7 @@
     </tr>
     </tbody>
   </table>
+
 </template>
 
 
@@ -155,7 +155,7 @@ let memberList = reactive([])
 const backData = axios  // eslint-disable-line no-unused-vars
     .get("http://localhost:8081/rest/getAllMember")
     .then(({data}) => {
-      // console.log(data)
+      console.log(data)
       memberList = data
     })
 
@@ -178,7 +178,7 @@ const backDataAllStudent = axios  // eslint-disable-line no-unused-vars
 
     })
 
-const showTitle = ref(false)
+let showTitle = ref(false)
 
 // const members = reactive({ // eslint-disable-line no-unused-vars
 //   actionList: [
@@ -224,10 +224,6 @@ const showTitle = ref(false)
 
 var state = reactive({txt: ""})
 
-function clearButt() {
-  state.txt = ""
-  this.searchList = []
-}
 
 const searchList = ref([])
 
@@ -243,7 +239,7 @@ function search() {
       searchList.value.push(teacherList[i])
     }
     console.log(searchList.value)
-  } else if (options == "student" && dataIndex == "") {
+  } else if (options == "student" && dataIndex == "") {//選學生 && 無輸入
     console.log("全部學生")
     for (let i = 0; i < studentList.length; i++) {
       searchList.value.push(studentList[i])
@@ -252,7 +248,6 @@ function search() {
     console.log("全部資料")
     for (let i = 0; i < memberList.length; i++) {
       searchList.value.push(memberList[i])
-      // searchList.value.forEach(a()=>console.log(a))
     }
   } else {
     if (dataIndex - 1 < memberList.length) {
@@ -265,19 +260,25 @@ function search() {
 
 
 let select = ref("")
-const  router= useRouter()
+const router = useRouter()
 
-//刪除index對不上
 function deleteMember(index) {
   console.log(searchList.value[index])
   this.showTitle = false
   this.searchList = []
-console.log(index)
-  axios.delete("http://localhost:8081/rest/delete?id="+index)
+  console.log(index)
+  axios.delete("http://localhost:8081/rest/delete?id=" + index)
       .then(res => {
         console.log(res.data);
         router.go(0)
+        alert("刪除成功")
       });
+}
+
+function clearButt() {
+  state.txt = ""
+  this.searchList = []
+  showTitle = false
 }
 
 </script>
