@@ -229,7 +229,12 @@ function deleteMember(index) {
       .then(res => {
         console.log(res.data);
         router.go(0)
-        alert("刪除成功")
+        if(res.status==200){
+          alert("刪除成功")
+        }
+        else{
+          alert("刪除失敗")
+        }
       });
 }
 

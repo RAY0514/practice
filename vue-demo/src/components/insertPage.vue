@@ -182,7 +182,7 @@ function insert() {
           if (response.status == 200) {
             alert("新增成功")
             router.push({path: "/"})
-          } else if (response.status == 204) {
+          } else {
             alert("新增失敗")
           }
         })

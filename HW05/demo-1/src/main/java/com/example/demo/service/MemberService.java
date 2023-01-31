@@ -113,7 +113,7 @@ public class MemberService {
     //crud
     public boolean insert(Member member) {
         //POST 插入資料放body
-        boolean state ;
+        boolean state;
         Optional<Member> checkId = memberRepository.findById(member.getId());//在原本的資料庫找member.getId()這筆
         if (!checkId.isPresent()) { //isPresent()= (checkId!=null)  //!checkId.isPresent() =>check是空的
             memberRepository.save(member);
@@ -126,20 +126,30 @@ public class MemberService {
         }
     }
 
-    public void update(Member newMember) {
+    public boolean update(Member newMember) {
+        boolean state;
         Optional<Member> checkId = memberRepository.findById(newMember.getId());
         if (checkId.isPresent()) {
             memberRepository.save(newMember);
+            state = true;
+            return state;
         } else {
             System.out.println("資料不存在");
+            state = false;
+            return state;
         }
     }
 
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean state;
         try {
             memberRepository.deleteById(id);
+            state = true;
+            return state;
         } catch (EmptyResultDataAccessException e) {
             System.out.println("沒有此筆資料");
+            state = false;
+            return state;
         }
     }
 
@@ -149,4 +159,3 @@ public class MemberService {
     }
 
 }
-

@@ -181,9 +181,9 @@ function updata() {
         console.log(response.status)
         router.go(0)
         if (response.status == 200) {
-          alert("成功")
+          alert("更新成功")
         }else{
-          alert("失敗")
+          alert("更新失敗")
         }
       })
 }

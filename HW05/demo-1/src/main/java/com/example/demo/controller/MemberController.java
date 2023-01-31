@@ -40,25 +40,30 @@ public class MemberController {
     @PostMapping("/rest/insert")
     @CrossOrigin
     public ResponseEntity<?> insert(@RequestBody Member member) {
-        if (memberService.insert(member) == false){
-            return ResponseEntity.noContent().build();
-        }else {
+        if (memberService.insert(member)) {
             return ResponseEntity.ok().body("ok");
+        } else {
+            return ResponseEntity.noContent().build();
         }
-
     }
 
     @PutMapping("/rest/update")
     @CrossOrigin
-    public void update(@RequestBody Member updateMember) {
-        memberService.update(updateMember);
+    public ResponseEntity<?> update(@RequestBody Member updateMember) {
+        if (memberService.update(updateMember)) {
+            return ResponseEntity.ok().body("ok");
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @DeleteMapping("/rest/delete")
     @CrossOrigin
     public ResponseEntity<?> delete(@RequestParam("id") String id) {
-        memberService.delete(id);
-        return ResponseEntity.ok().body("ok");
-
+        if (memberService.delete(id)) {
+            return ResponseEntity.ok().body("ok");
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 }
