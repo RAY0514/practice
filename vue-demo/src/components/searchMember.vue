@@ -146,10 +146,6 @@ import {reactive, ref} from 'vue'
 import axios from 'axios'
 import {useRouter} from "vue-router";
 
-//https://book.vue.tw/CH1/1-2-instance.html
-//路由https://cn.vuejs.org/guide/scaling-up/routing.html#simple-routing-from-scratch
-//http://localhost:8081/rest/getAllMember
-
 //全部資料
 let memberList = reactive([])
 const backData = axios  // eslint-disable-line no-unused-vars
@@ -179,48 +175,6 @@ const backDataAllStudent = axios  // eslint-disable-line no-unused-vars
     })
 
 let showTitle = ref(false)
-
-// const members = reactive({ // eslint-disable-line no-unused-vars
-//   actionList: [
-//     {
-//       id: "1",
-//       name: "Billy",
-//       gender: "male",
-//       subject: "數學",
-//       jobTitle: "教務主任",
-//       classes: "無",
-//       admissionYearMonth: "無"
-//     },
-//     {
-//       id: "2",
-//       name: "Heidi",
-//       gender: "female",
-//       subject: "英文",
-//       jobTitle: "教師",
-//       classes: "無",
-//       admissionYearMonth: "無"
-//     },
-//     {
-//       id: "3",
-//       name: "jacky",
-//       gender: "male",
-//       subject: "無",
-//       jobTitle: "無",
-//       classes: "301",
-//       admissionYearMonth: "201910"
-//     },
-//     {
-//       id: "4",
-//       name: "Lawrence",
-//       gender: "male",
-//       subject: "無",
-//       jobTitle: "無",
-//       classes: "801",
-//       admissionYearMonth: "201812"
-//     },
-//
-//   ]
-// })
 
 var state = reactive({txt: ""})
 

@@ -46,7 +46,7 @@
         class="form-select"
         aria-label="select"
         v-model="input.select"
-        @change="selectChang"
+        @change="selectChange"
     >
       {{ input.select }}
       <option selected value="teacher">
@@ -128,13 +128,7 @@
 </template>
 
 <script setup>
-// export default {
-//   name: 'insertPage.vue',
-//   props: {
-//     msg: String
-//   }
-// }
-import {reactive, ref, vModelSelect} from 'vue'
+import {reactive} from 'vue'
 import axios from "axios";
 import {useRouter} from "vue-router";
 
@@ -156,7 +150,6 @@ const backData = axios  // eslint-disable-line no-unused-vars
       console.log(data)
       memberList = data
     })
-
 
 const router = useRouter()
 
@@ -195,28 +188,23 @@ function insert() {
         })
     router.push({path: "/"})
   }
-
 }
-
 
 function clear() {
-  input.num = "",
-      input.name = "",
-      input.gender = "",
-      input.subject = "",
-      input.jobTitle = "",
-      input.class = "",
-      input.admissionYearMonth = ""
+  input.num = null,
+      input.name = null,
+      input.gender = null,
+      input.subject = null,
+      input.jobTitle = null,
+      input.class = null,
+      input.admissionYearMonth = null
 }
 
-function selectChang () {
-  if(input.select!=""){
-    input.subject = null,
-        input.jobTitle = null,
-        input.class = null,
-        input.admissionYearMonth = null
-  }
-
+function selectChange() {
+  input.subject = null,
+      input.jobTitle = null,
+      input.class = null,
+      input.admissionYearMonth = null
 }
 
 </script>

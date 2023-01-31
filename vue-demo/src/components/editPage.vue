@@ -132,13 +132,7 @@
 
 <script setup>
 
-// export default {
-//   name: 'insertPage.vue',
-//   props: {
-//     msg: String
-//   }
-// }
-import {reactive, ref} from 'vue'
+import {reactive} from 'vue'
 import axios from "axios";
 import {useRoute} from "vue-router";
 import router from "@/router";
