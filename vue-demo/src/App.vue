@@ -1,31 +1,12 @@
 <template>
-<!--  <search-member></search-member>-->
-<!--  <insert-page></insert-page>-->
-
   <div id="nav">
     <router-link to="/"> 首頁 </router-link> |
     <router-link to="/insertPage"> 新增頁面 </router-link>
   </div>
   <router-view />
-
 </template>
 
 <script setup>
-
-// import searchMember from './components/searchMember.vue'
-// import insertPage from './components/insertPage.vue'
-//
-// export default {
-//   name: 'App',
-//   components: {
-//     searchMember, // eslint-disable-line no-unused-vars
-//
-//     insertPage// eslint-disable-line no-unused-vars
-//
-//
-//
-//   }
-// }
 
 </script>
 

@@ -21,7 +21,7 @@ public class MemberService {
     public List<Member> getAllMember() {
         List<Member> memberList = new ArrayList<>();
         for (Member teacherMember : getAllTeacher()) {//放老師
-            x.add(teacherMember);
+            memberList.add(teacherMember);
         }
         for (Member studentMember : getAllStudent()) {//放學生
             memberList.add(studentMember);
@@ -111,13 +111,18 @@ public class MemberService {
     }
 
     //crud
-    public void insert(Member member) {
+    public boolean insert(Member member) {
         //POST 插入資料放body
+        boolean state ;
         Optional<Member> checkId = memberRepository.findById(member.getId());//在原本的資料庫找member.getId()這筆
         if (!checkId.isPresent()) { //isPresent()= (checkId!=null)  //!checkId.isPresent() =>check是空的
             memberRepository.save(member);
+            state = true;
+            return state;
         } else {
             System.out.println("此id已存在");
+            state = false;
+            return state;
         }
     }
 

@@ -14,9 +14,6 @@ public class MemberController {
 
     @GetMapping("/rest/getAllMember")
     public ResponseEntity<?> getAllMember() {
-
-//        return memberService.getAllMember();
-        System.out.println(memberService.getAllMember().size());
         return ResponseEntity.ok().header("Access-Control-Allow-Origin", "*").body(memberService.getAllMember());
     }
 
@@ -43,9 +40,12 @@ public class MemberController {
     @PostMapping("/rest/insert")
     @CrossOrigin
     public ResponseEntity<?> insert(@RequestBody Member member) {
-        memberService.insert(member);
-        System.out.println("here");
-        return ResponseEntity.ok().body("ok");
+        if (memberService.insert(member) == false){
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.ok().body("ok");
+        }
+
     }
 
     @PutMapping("/rest/update")

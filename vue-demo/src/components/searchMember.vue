@@ -178,7 +178,6 @@ let showTitle = ref(false)
 
 var state = reactive({txt: ""})
 
-
 const searchList = ref([])
 
 function search() {
@@ -205,9 +204,14 @@ function search() {
     }
   } else {
     if (dataIndex - 1 < memberList.length) {
-      searchList.value.push(memberList[dataIndex - 1])
+      for (let i = 0; i < memberList.length; i++) {
+        if (memberList[i].id == dataIndex) {
+          searchList.value.push(memberList[i])
+        }
+      }
     } else {
-      alert("無此資料")
+      alert("查無資料")
+      showTitle = false
     }
   }
 }

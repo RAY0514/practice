@@ -179,14 +179,13 @@ function insert() {
         .then(response => {
           console.log(response.status)
           console.log(response.data)
-          router.go(0)
           if (response.status == 200) {
             alert("新增成功")
-          } else {
+            router.push({path: "/"})
+          } else if (response.status == 204) {
             alert("新增失敗")
           }
         })
-    router.push({path: "/"})
   }
 }
 
